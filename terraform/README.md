@@ -4,20 +4,24 @@
   `terraform --version`
 - [aws-cli](https://aws.amazon.com/cli/) installed and setup with learner lab, verify by command  
   `aws iam list roles`
+- [helm](https://helm.sh/docs/intro/install/) installed, verify by command  
+  `helm version`
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) installed, verify by command  
+  `kubectl version`
 
-## Initialization
+## Setup
 
-Run command  
-`terraform init`
+1. If running for the first time, initialize terraform:  
+   `terraform init`
 
-## Useful commands
+2. Run below command to create EKS with cilium and connect kubectl to kubernetes cluster:  
+   `terraform apply -auto-approve`
 
-Commands needs to be run in current (`<project_root>/terraform`) directory.
+3. Verify everything is OK by running:  
+   `kubectl -n kube-system get pods`
 
-`terraform plan` - check what resources will be created after `terraform apply`  
-`terraform apply` - create resources defined in `main.tf`  
-`terraform destroy` - destroy previously created resources
+## Clean up
 
-NOTE : after running `terraform apply` kubectl is ready to use with EKS,
-check it by running  
-`kubectl get nodes`
+1. Run below to destroy all created resources:  
+   `terraform destroy -auto-approve`  
+   NOTE: you need to wait for completion. Then destroy learner lab
