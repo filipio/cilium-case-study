@@ -32,16 +32,6 @@ resource "aws_eks_cluster" "labCluster" {
 
 }
 
-resource "aws_eks_addon" "vpc-cni" {
-  cluster_name = aws_eks_cluster.labCluster.name
-  addon_name   = "vpc-cni"
-}
-
-resource "aws_eks_addon" "kube-proxy" {
-  cluster_name = aws_eks_cluster.labCluster.name
-  addon_name   = "kube-proxy"
-}
-
 resource "null_resource" "kubectl" {
   triggers = {
     node_group_arn = aws_eks_cluster.labCluster.arn
